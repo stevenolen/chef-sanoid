@@ -1,57 +1,61 @@
 # Managed by Chef for node <%= node['fqdn'] -%>.
 
-############
-# Datasets #
-############
-
-<% if @datasets %>
-<% @datasets.each do |dataset| -%>
-<% set = dataset[1] -%>
-[<%= set.name %>]
-  use_template = <%= set.use_template %>
-  <% set.hourly if set.hourly -%>
-  <% set.daily if set.daily -%>
-  <% set.monthly if set.monthly -%>
-  <% set.yearly if set.yearly -%>
-  <% set.autosnap if set.autosnap -%>
-  <% set.autoprune if set.autoprune -%>
-  <% set.min_percent_free if set.min_percent_free -%>
-  <% set.hourly_min if set.hourly_min -%>
-  <% set.daily_hour if set.daily_hour -%>
-  <% set.daily_min if set.daily_min -%>
-  <% set.monthly_mday if set.monthly_mday -%>
-  <% set.monthly_mhour if set.monthly_mhour -%>
-  <% set.monthly_min if set.monthly_min -%>
-  <% set.yearly_yday if set.yearly_yday -%>
-  <% set.yearly_hour if set.yearly_hour -%>
-  <% set.yearly_min if set.yearly_min -%>
+#### DATASETS ####
+<% @sanoid.each do |resource| -%>
+<% if resource.resource_name == :sanoid_dataset -%>
+[<%= resource.name %>]
+<% %w(use_template hourly daily monthly yearly autosnap autoprune min_percent_free hourly_min daily_hour daily_min monthly_mday monthly_mhour monthly_min yearly_mon yearly_mday yearly_hour yearly_min).each do |prop| %>
+<% if resource.send(prop) %>
+ <%= prop -%> = <%=resource.send(prop) %>
+<% end %>
+<% end %>
 <% end -%>
 <% end -%>
 
-#############
-# Templates #
-#############
+#### TEMPLATES ####
+<% @sanoid.each do |resource| -%>
+<% if resource.resource_name == :sanoid_template -%>
+[template_<%= resource.name %>]
+<% %w(hourly daily monthly yearly autosnap autoprune min_percent_free hourly_min daily_hour daily_min monthly_mday monthly_mhour monthly_min yearly_mon yearly_mday yearly_hour yearly_min).each do |prop| %>
+<% if resource.send(prop) %>
+ <%= prop -%> = <%=resource.send(prop) %>
+<% end %>
+<% end %>
+<% end -%>
+<% end -%>
 
-<% if @templates %>
-<% @templates.each do |template| -%>
-<% Chef::Log.info "TESTTESTSETSETESTSE #{ template[1] }" -%>
-<% set2 = template[0] -%>
-[template-<%= set2.name %>]
-  <% set2.hourly if set2.hourly -%>
-  <% set2.daily if set2.daily -%>
-  <% set2.monthly if set2.monthly -%>
-  <% set2.yearly if set2.yearly -%>
-  <% set2.autosnap if set2.autosnap -%>
-  <% set2.autoprune if set2.autoprune -%>
-  <% set2.min_percent_free if set2.min_percent_free -%>
-  <% set2.hourly_min if set2.hourly_min -%>
-  <% set2.daily_hour if set2.daily_hour -%>
-  <% set2.daily_min if set2.daily_min -%>
-  <% set2.monthly_mday if set2.monthly_mday -%>
-  <% set2.monthly_mhour if set2.monthly_mhour -%>
-  <% set2.monthly_min if set2.monthly_min -%>
-  <% set2.yearly_yday if set2.yearly_yday -%>
-  <% set2.yearly_hour if set2.yearly_hour -%>
-  <% set2.yearly_min if set2.yearly_min -%>
-<% end -%>
-<% end -%>
+###################################################################################
+# default template - contains same values as hardcoded, unless you override here. #
+#                    ALL values set here, so useful as documentation even if      #
+#                    nothing is actually overridden.                              #
+###################################################################################
+
+[template_default]
+template = yes
+autoprune = yes
+hourly = 48
+daily = 90
+monthly = 6
+yearly = 0
+min_percent_free = 10
+autosnap = 1;
+hourly_min = 0;
+daily_hour = 23;
+daily_min = 59;
+monthly_mday = 1;
+monthly_hour = 0;
+monthly_min = 0;
+yearly_yday = 1;
+yearly_hour = 0;
+yearly_min = 0;
+monitor = yes
+monitor_dont_warn = no
+monitor_dont_crit = no
+hourly_warn = 90
+hourly_crit = 360 
+daily_warn = 28
+daily_crit = 32
+monthly_warn = 32
+monthly_crit = 35
+yearly_warn = 0
+yearly_crit = 0

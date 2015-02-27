@@ -3,5 +3,10 @@ maintainer       'Steve Nolen'
 maintainer_email 'technolengy@gmail.com'
 license          'GPL v3'
 description      'Installs/Configures sanoid'
-long_description 'Installs/Configures sanoid'
-version          '0.1.0'
+long_description IO.read(File.join(File.dirname(__FILE__), 'README.md'))
+version          '1.0.0'
+
+recipe 'default', 'Installs sanoid from github'
+
+depends 'accumulator'
+depends 'perl'

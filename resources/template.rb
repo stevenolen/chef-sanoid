@@ -19,7 +19,6 @@
 actions :create
 
 attribute :name, :kind_of => String, :name_attribute => true, :required => true
-attribute :definition, :kind_of => String
 
 attribute :hourly, :kind_of => Integer, default: 0
 attribute :daily, :kind_of => Integer, default: 0
@@ -36,7 +35,8 @@ attribute :daily_min, :kind_of => Integer
 attribute :monthly_mday, :kind_of => Integer
 attribute :monthly_mhour, :kind_of => Integer
 attribute :monthly_min, :kind_of => Integer
-attribute :yearly_yday, :kind_of => Integer
+attribute :yearly_mon, :kind_of => Integer
+attribute :yearly_mday, :kind_of => Integer
 attribute :yearly_hour, :kind_of => Integer
 attribute :yearly_min, :kind_of => Integer
 

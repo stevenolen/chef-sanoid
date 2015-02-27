@@ -16,5 +16,18 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-default['sanoid']['bin_path']         = '/usr/local/bin'
-default['sanoid']['config_path']  = '/etc/sanoid'
+default['sanoid']['bin_path'] = '/usr/local/bin'
+default['sanoid']['config_path'] = '/etc/sanoid'
+
+case node['platform_family']
+  when "debian", "rhel"
+   default['sanoid']['user'] = "root"
+   default['sanoid']['group'] = "root"
+   default['sanoid']['cron_cmd'] = "#{node['sanoid']['bin_path']}/sanoid --cron"
+   default['sanoid']['syncoid_cmd'] = "#{node['sanoid']['bin_path']}/syncoid"
+  when "freebsd"
+   default['sanoid']['user'] = "root"
+   default['sanoid']['group'] = "wheel"
+   default['sanoid']['cron_cmd'] = "perl -I /usr/local/lib/perl5/site_perl/ -I /usr/local/lib/perl5/site_perl/mach/5.18/ #{node['sanoid']['bin_path']}/sanoid --cron"
+   default['sanoid']['syncoid_cmd'] = "perl -I /usr/local/lib/perl5/site_perl/ -I /usr/local/lib/perl5/site_perl/mach/5.18/ #{node['sanoid']['bin_path']}/syncoid"
+end

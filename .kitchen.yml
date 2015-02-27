@@ -6,7 +6,7 @@ provisioner:
   name: chef_zero
 
 platforms:
-  - name: freebsd-10.0
+  - name: freebsd-10.1
 
 suites:
   - name: default

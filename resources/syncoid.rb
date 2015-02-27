@@ -1,5 +1,5 @@
 # Cookbook Name:: sanoid
-# Providers:: template
+# Resource:: syncoid
 #
 # Copyright (C) 2015, Steve Nolen <technolengy@gmail.com>
 #
@@ -14,8 +14,20 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.  
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-action :create do
-  #Thanks chef-accumulator!
+actions :create, :delete
+default_action :create
+
+attribute :name, :kind_of => String, :name_attribute => true, :required => true
+
+attribute :dataset, :kind_of => String, :required => true
+attribute :user, :kind_of => String, default: node['sanoid']['user']
+attribute :server, :kind_of => String, :required => true
+attribute :target, :kind_of => String, :required => true
+attribute :cron, :kind_of => String, default: '0 0 * * *'
+
+def initialize(*args)
+  super
+  @action = :create
 end

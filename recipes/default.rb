@@ -16,26 +16,39 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#installs sanoid from github master, this seems to be the way!
+#Grab pre-requisities
+case node['platform_family']
+when 'freebsd'
+  package 'p5-Config-IniFiles'
+  package 'p5-libwww'
+else
+ include_recipe "perl"
+ cpan_module "Config::IniFiles"
+ cpan_module "LWP::Simple"
+end
 
-
+#installs sanoid/syncoid from github master, this seems to be the way!
 remote_file "#{node['sanoid']['bin_path']}/sanoid" do
   source "https://raw.githubusercontent.com/jimsalterjrs/sanoid/master/sanoid"
+  user node['sanoid']['user']
+  group node['sanoid']['group']
+  mode '0750'
+  action :create_if_missing
+end
+
+remote_file "#{node['sanoid']['bin_path']}/syncoid" do
+  source "https://raw.githubusercontent.com/jimsalterjrs/sanoid/master/syncoid"
+  user node['sanoid']['user']
+  group node['sanoid']['group']
   action :create_if_missing
 end
 
 directory "#{node['sanoid']['config_path']}" do
-  owner 'root'
-  group 'root'
+  user node['sanoid']['user']
+  group node['sanoid']['group']
   mode '0750'
   action :create
 end
-
-#add syncoid later when we support it.
-#remote_file "#{node['sanoid']['bin_path']}/syncoid" do
-#  source "https://raw.githubusercontent.com/jimsalterjrs/sanoid/master/syncoid"
-#  action :create_if_missing
-#end
 
 cron "sanoid" do
   minute '*'
@@ -44,5 +57,24 @@ cron "sanoid" do
   month '*'
   weekday '*'
   action :create
-  command "#{node['sanoid']['bin_path']}/sanoid --cron"
+  command node['sanoid']['cron_cmd']
+end
+
+template "#{node['sanoid']['config_path']}/sanoid.conf" do
+  action :nothing
+  source 'sanoid.conf.erb'
+  user node['sanoid']['user']
+  group node['sanoid']['group']
+  mode 0644
+  variables(sanoid: Array.new)
+end
+
+accumulator 'sanoid.conf.templates' do
+  target template: "#{node['sanoid']['config_path']}/sanoid.conf"
+  filter { |resource| resource.is_a? Chef::Resource::SanoidTemplate or resource.is_a? Chef::Resource::SanoidDataset}
+  transform do |resources|
+    list = resources.map { |r| r }
+    list.compact.sort_by { |r| r.name }
+  end
+  variable_name :sanoid
 end

@@ -17,26 +17,5 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.  
 
 action :create do
-  conf_file = nil
-  begin
-    conf_file = run_context.resource_collection.find(:template => "#{node['sanoid']['config_path']}/sanoid.conf")
-  rescue Chef::Exceptions::ResourceNotFound
-    conf_file = template "#{node['sanoid']['config_path']}/sanoid.conf" do
-      action :nothing
-      mode "644"
-      owner "root"
-      group "nobody"
-      source "sanoid.conf.erb"
-      variables({:datasets => {}, :templates =>{}})
-    end
-    new_resource.notifies(:create, conf_file, :delayed)
-  end
-
-  #actually build the resources
-
-  if not conf_file.variables[:datasets].has_key?(new_resource.name)
-    conf_file.variables[:datasets][new_resource.name] = new_resource
-  end
-
-  new_resource.updated_by_last_action(true)
+  #Thanks chef-accumulator!
 end

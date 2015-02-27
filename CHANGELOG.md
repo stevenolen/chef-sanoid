@@ -1,3 +1,3 @@
-# 0.1.0
+# 1.0.0
 
-Initial release of sanoid
+Initial release of sanoid!

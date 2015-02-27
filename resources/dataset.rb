@@ -36,7 +36,8 @@ attribute :daily_min, :kind_of => Integer
 attribute :monthly_mday, :kind_of => Integer
 attribute :monthly_mhour, :kind_of => Integer
 attribute :monthly_min, :kind_of => Integer
-attribute :yearly_yday, :kind_of => Integer
+attribute :yearly_mon, :kind_of => Integer
+attribute :yearly_mday, :kind_of => Integer
 attribute :yearly_hour, :kind_of => Integer
 attribute :yearly_min, :kind_of => Integer
 
