@@ -2,7 +2,7 @@
 
 ## Description
 
-A chef cookbook which provides an LWRP interface for the [sanoid](https://github.com/jimsalterjrs/sanoid) tool (for making snapshots with ZFS).  Additionally the `sanoid::default` recipe installs the latest sanoid and syncoid to the system. Thanks to [chef-accumulator](https://github.com/kisoku/chef-accumulator) and [opscode-backup](https://github.com/opscode-cookbooks/opscode-backup) (for some cookbook design patterns) cookbook and also github user jimsalterjrs for the snapshot tool!
+A chef cookbook which provides an LWRP interface for the [sanoid](https://github.com/jimsalterjrs/sanoid) tool (for making snapshots with ZFS).  Additionally the `sanoid::default` recipe installs the latest sanoid and syncoid to the system. Thanks to [chef-accumulator](https://github.com/kisoku/chef-accumulator) and [opscode-backup](https://github.com/opscode-cookbooks/opscode-backup) (for some cookbook design patterns) cookbooks as well as github user [jimsalterjrs](https://github.com/jimsalterjrs) for the snapshot tool!
 
 ## Supports
 
