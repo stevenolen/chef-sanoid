@@ -43,7 +43,7 @@ remote_file "#{node['sanoid']['bin_path']}/syncoid" do
   action :create_if_missing
 end
 
-directory "#{node['sanoid']['config_path']}" do
+directory node['sanoid']['config_path'] do
   user node['sanoid']['user']
   group node['sanoid']['group']
   mode '0750'

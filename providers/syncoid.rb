@@ -29,6 +29,7 @@ action :create do
    action :create
   end
   Chef::Log.debug "#{new_resource.name} syncoid job created"
+  new_resource.updated_by_last_action(true)
 end
 
 action :delete do
@@ -43,6 +44,7 @@ action :delete do
     action :delete
   end
   Chef::Log.debug "#{new_resource.name} syncoid job deleted"
+  new_resource.updated_by_last_action(true)
 end
 
 def get_time(schedule)
@@ -53,8 +55,8 @@ def get_time(schedule)
 end
 
 def get_command(res)
-  cmd = "#{node['sanoid']['syncoid_cmd']} "
-  cmd += "#{res.dataset} "
+  cmd = node['sanoid']['syncoid_cmd']
+  cmd += " #{res.dataset} "
   cmd += "#{res.user}@"
   cmd += "#{res.server}:"
   cmd += "#{res.target}"

@@ -10,7 +10,5 @@ platforms:
 
 suites:
   - name: default
-    run_list: ["sanoid::default",
-    	       "sanoid::test"
-    	       ]
+    run_list: ["sanoid::default"]
     attributes:
