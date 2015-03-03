@@ -1,9 +1,8 @@
+require 'codeclimate-test-reporter'
+CodeClimate::TestReporter.start
 require 'chefspec'
 require 'chefspec/berkshelf'
 require 'chefspec/cacher'
-require 'codeclimate-test-reporter'
-
-CodeClimate::TestReporter.start
 
 RSpec.configure do |config|
   config.log_level = :fatal
