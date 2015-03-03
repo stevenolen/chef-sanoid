@@ -1,6 +1,6 @@
 # sanoid-cookbook
 
-[![Build Status](https://travis-ci.org/stevenolen/chef-sanoid.svg?branch=master)](https://travis-ci.org/stevenolen/chef-sanoid) [![Code Climate](https://codeclimate.com/github/stevenolen/chef-sanoid/badges/gpa.svg)](https://codeclimate.com/github/stevenolen/chef-sanoid)
+[![Build Status](https://travis-ci.org/stevenolen/chef-sanoid.svg?branch=master)](https://travis-ci.org/stevenolen/chef-sanoid) [![Test Coverage](https://codeclimate.com/github/stevenolen/chef-sanoid/badges/coverage.svg)](https://codeclimate.com/github/stevenolen/chef-sanoid)
 
 ## Description
 
