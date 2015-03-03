@@ -16,6 +16,7 @@ gem 'berkshelf'
 
 gem 'test-kitchen'
 gem 'kitchen-vagrant'
+gem "codeclimate-test-reporter", group: :test, require: nil
 
 group :lint do
   gem 'foodcritic', '~> 4.0'

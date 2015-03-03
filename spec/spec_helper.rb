@@ -1,6 +1,9 @@
 require 'chefspec'
 require 'chefspec/berkshelf'
 require 'chefspec/cacher'
+require "codeclimate-test-reporter"
+
+CodeClimate::TestReporter.start
 
 # Require all our libraries
 Dir['libraries/*.rb'].each { |f| require File.expand_path(f) }
