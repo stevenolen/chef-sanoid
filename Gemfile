@@ -16,3 +16,15 @@ gem 'berkshelf'
 
 gem 'test-kitchen'
 gem 'kitchen-vagrant'
+
+group :lint do
+  gem 'foodcritic', '~> 4.0'
+  gem 'rubocop', '~> 0.18'
+  gem 'rainbow', '< 2.0'
+  gem 'rake'
+end
+
+group :unit do
+  gem 'berkshelf',   '~> 3.2'
+  gem 'chefspec',   '~> 4.2'
+end
