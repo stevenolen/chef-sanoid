@@ -67,7 +67,7 @@ template "#{node['sanoid']['config_path']}/sanoid.conf" do
   user node['sanoid']['user']
   group node['sanoid']['group']
   mode 0644
-  variables(sanoid: Array.new)
+  variables(sanoid: [])
 end
 
 accumulator 'sanoid.conf.templates' do

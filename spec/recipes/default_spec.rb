@@ -46,5 +46,4 @@ describe 'sanoid::default' do
         .with(minute: '1', hour: '1', day: '*', month: '*', weekday: '*')
     end
   end
-
 end
