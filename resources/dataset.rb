@@ -18,30 +18,30 @@
 
 actions :create
 
-attribute :name, :kind_of => String, :name_attribute => true, :required => true
-attribute :use_template, :kind_of => String, :required => true
+attribute :name, kind_of: String, name_attribute: true, required: true
+attribute :use_template, kind_of: String, required: true
 
-attribute :hourly, :kind_of => Integer
-attribute :daily, :kind_of => Integer
-attribute :monthly, :kind_of => Integer
-attribute :yearly, :kind_of => Integer
-attribute :autosnap, :kind_of => String
-attribute :autoprune, :kind_of => String
-attribute :min_percent_free, :kind_of => Integer
+attribute :hourly, kind_of: Integer
+attribute :daily, kind_of: Integer
+attribute :monthly, kind_of: Integer
+attribute :yearly, kind_of: Integer
+attribute :autosnap, kind_of: String
+attribute :autoprune, kind_of: String
+attribute :min_percent_free, kind_of: Integer
 
-#when to run, no need to set these unless you want to be really specific
-attribute :hourly_min, :kind_of => Integer
-attribute :daily_hour, :kind_of => Integer
-attribute :daily_min, :kind_of => Integer
-attribute :monthly_mday, :kind_of => Integer
-attribute :monthly_mhour, :kind_of => Integer
-attribute :monthly_min, :kind_of => Integer
-attribute :yearly_mon, :kind_of => Integer
-attribute :yearly_mday, :kind_of => Integer
-attribute :yearly_hour, :kind_of => Integer
-attribute :yearly_min, :kind_of => Integer
+# when to run, no need to set these unless you want to be really specific
+attribute :hourly_min, kind_of: Integer
+attribute :daily_hour, kind_of: Integer
+attribute :daily_min, kind_of: Integer
+attribute :monthly_mday, kind_of: Integer
+attribute :monthly_mhour, kind_of: Integer
+attribute :monthly_min, kind_of: Integer
+attribute :yearly_mon, kind_of: Integer
+attribute :yearly_mday, kind_of: Integer
+attribute :yearly_hour, kind_of: Integer
+attribute :yearly_min, kind_of: Integer
 
-#TODO: Monitoring pieces
+# TODO: Monitoring pieces
 
 def initialize(*args)
   super

@@ -19,13 +19,13 @@
 actions :create, :delete
 default_action :create
 
-attribute :name, :kind_of => String, :name_attribute => true, :required => true
+attribute :name, kind_of: String, name_attribute: true, required: true
 
-attribute :dataset, :kind_of => String, :required => true
-attribute :user, :kind_of => String, default: node['sanoid']['user']
-attribute :server, :kind_of => String, :required => true
-attribute :target, :kind_of => String, :required => true
-attribute :cron, :kind_of => String, default: '0 0 * * *'
+attribute :dataset, kind_of: String, required: true
+attribute :user, kind_of: String, default: node['sanoid']['user']
+attribute :server, kind_of: String, required: true
+attribute :target, kind_of: String, required: true
+attribute :cron, kind_of: String, default: '0 0 * * *'
 
 def initialize(*args)
   super

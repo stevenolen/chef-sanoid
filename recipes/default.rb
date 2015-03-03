@@ -16,20 +16,20 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#Grab pre-requisities
+# Grab pre-requisities
 case node['platform_family']
 when 'freebsd'
   package 'p5-Config-IniFiles'
   package 'p5-libwww'
 else
- include_recipe "perl"
- cpan_module "Config::IniFiles"
- cpan_module "LWP::Simple"
+  include_recipe 'perl'
+  cpan_module 'Config::IniFiles'
+  cpan_module 'LWP::Simple'
 end
 
-#installs sanoid/syncoid from github master, this seems to be the way!
+# installs sanoid/syncoid from github master, this seems to be the way!
 remote_file "#{node['sanoid']['bin_path']}/sanoid" do
-  source "https://raw.githubusercontent.com/jimsalterjrs/sanoid/master/sanoid"
+  source 'https://raw.githubusercontent.com/jimsalterjrs/sanoid/master/sanoid'
   user node['sanoid']['user']
   group node['sanoid']['group']
   mode '0750'
@@ -37,7 +37,7 @@ remote_file "#{node['sanoid']['bin_path']}/sanoid" do
 end
 
 remote_file "#{node['sanoid']['bin_path']}/syncoid" do
-  source "https://raw.githubusercontent.com/jimsalterjrs/sanoid/master/syncoid"
+  source 'https://raw.githubusercontent.com/jimsalterjrs/sanoid/master/syncoid'
   user node['sanoid']['user']
   group node['sanoid']['group']
   mode '0750'
@@ -51,7 +51,7 @@ directory node['sanoid']['config_path'] do
   action :create
 end
 
-cron "sanoid" do
+cron 'sanoid' do
   minute '*'
   hour '*'
   day '*'
@@ -72,10 +72,10 @@ end
 
 accumulator 'sanoid.conf.templates' do
   target template: "#{node['sanoid']['config_path']}/sanoid.conf"
-  filter { |resource| resource.is_a? Chef::Resource::SanoidTemplate or resource.is_a? Chef::Resource::SanoidDataset}
+  filter { |resource| resource.is_a?(Chef::Resource::SanoidTemplate || Chef::Resource::SanoidDataset) }
   transform do |resources|
     list = resources.map { |r| r }
-    list.compact.sort_by { |r| r.name }
+    list.compact.sort_by(&:name)
   end
   variable_name :sanoid
 end

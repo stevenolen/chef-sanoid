@@ -15,35 +15,35 @@ describe 'sanoid::default' do
     end
     it 'creates sanoid executable' do
       expect(chef_run).to create_remote_file_if_missing('/usr/local/bin/sanoid')
-       .with(owner: 'root')
-       .with(group: 'wheel')
-       .with(mode: '0750')
+        .with(owner: 'root')
+        .with(group: 'wheel')
+        .with(mode: '0750')
       expect(chef_run).to_not create_remote_file_if_missing('/usr/local/bin/sanoid')
-       .with(owner: 'veggie-bacon')
-       .with(group: 'veggie-bacon')
-       .with(mode: '0777')
+        .with(owner: 'veggie-bacon')
+        .with(group: 'veggie-bacon')
+        .with(mode: '0777')
     end
     it 'creates syncoid executable' do
       expect(chef_run).to create_remote_file_if_missing('/usr/local/bin/syncoid')
-       .with(owner: 'root')
-       .with(group: 'wheel')
-       .with(mode: '0750')
+        .with(owner: 'root')
+        .with(group: 'wheel')
+        .with(mode: '0750')
       expect(chef_run).to_not create_remote_file_if_missing('/usr/local/bin/syncoid')
-       .with(owner: 'veggie-bacon')
-       .with(group: 'veggie-bacon')
-       .with(mode: '0777')
+        .with(owner: 'veggie-bacon')
+        .with(group: 'veggie-bacon')
+        .with(mode: '0777')
     end
     it 'creates sanoid conf dir' do
       expect(chef_run).to create_directory('/etc/sanoid')
-       .with(owner: 'root')
-       .with(group: 'wheel')
-       .with(mode: '0750')
+        .with(owner: 'root')
+        .with(group: 'wheel')
+        .with(mode: '0750')
     end
     it 'creates a sanoid cron job' do
       expect(chef_run).to create_cron('sanoid')
-       .with(minute: '*', hour: '*', day: '*', month: '*', weekday: '*')
+        .with(minute: '*', hour: '*', day: '*', month: '*', weekday: '*')
       expect(chef_run).to_not create_cron('sanoid')
-       .with(minute: '1', hour: '1', day: '*', month: '*', weekday: '*')
+        .with(minute: '1', hour: '1', day: '*', month: '*', weekday: '*')
     end
   end
 

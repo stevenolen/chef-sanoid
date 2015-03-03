@@ -14,19 +14,19 @@
 # GNU General Public License for more details.
 #
 # You should have received a copy of the GNU General Public License
-# along with this program.  If not, see <http://www.gnu.org/licenses/>.  
+# along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-#credits to https://github.com/opscode-cookbooks/opscode-backup/ for this provider
+# credits to https://github.com/opscode-cookbooks/opscode-backup/ for this provider
 action :create do
   cron "syncoid_#{new_resource.name}" do
-   minute get_time(new_resource.cron)[:minute]
-   hour get_time(new_resource.cron)[:hour]
-   day get_time(new_resource.cron)[:day]
-   month get_time(new_resource.cron)[:month]
-   weekday get_time(new_resource.cron)[:weekday]
-   user new_resource.user
-   command get_command(new_resource)
-   action :create
+    minute get_time(new_resource.cron)[:minute]
+    hour get_time(new_resource.cron)[:hour]
+    day get_time(new_resource.cron)[:day]
+    month get_time(new_resource.cron)[:month]
+    weekday get_time(new_resource.cron)[:weekday]
+    user new_resource.user
+    command get_command(new_resource)
+    action :create
   end
   Chef::Log.debug "#{new_resource.name} syncoid job created"
   new_resource.updated_by_last_action(true)
@@ -50,7 +50,7 @@ end
 def get_time(schedule)
   @schedule ||= begin
     s = schedule.split(' ')
-    { :minute => s[0], :hour => s[1], :day => s[2], :month => s[3], :weekday => s[4] }
+    { minute: s[0], hour: s[1], day: s[2], month: s[3], weekday: s[4] }
   end
 end
 
@@ -59,7 +59,7 @@ def get_command(res)
   cmd += " #{res.dataset} "
   cmd += "#{res.user}@"
   cmd += "#{res.server}:"
-  cmd += "#{res.target}"
+  cmd += res.target
 
   cmd
 end
