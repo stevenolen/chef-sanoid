@@ -40,6 +40,7 @@ remote_file "#{node['sanoid']['bin_path']}/syncoid" do
   source "https://raw.githubusercontent.com/jimsalterjrs/sanoid/master/syncoid"
   user node['sanoid']['user']
   group node['sanoid']['group']
+  mode '0750'
   action :create_if_missing
 end
 
