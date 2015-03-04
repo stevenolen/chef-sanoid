@@ -3,4 +3,4 @@ source 'https://supermarket.getchef.com'
 metadata
 
 cookbook 'accumulator'
-cookbook 'perl'
+cookbook 'perl', git: 'https://github.com/opscode-cookbooks/perl'

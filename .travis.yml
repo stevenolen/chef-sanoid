@@ -4,6 +4,3 @@ rvm:
 - 2.1.0
 script:
 - rake
-addons:
-  code_climate:
-    repo_token: 2d614f3f32e20f2cd63a951c1bf4d0a0a83602ae4317832dce270e6d01f51277

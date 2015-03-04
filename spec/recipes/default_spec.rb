@@ -6,7 +6,6 @@ describe 'sanoid::default' do
       ChefSpec::ServerRunner.new(platform: 'freebsd', version: '10.0')
         .converge(described_recipe)
     end
-
     it 'installs p5-Config-IniFiles' do
       expect(chef_run).to install_package('p5-Config-IniFiles')
     end
@@ -44,6 +43,15 @@ describe 'sanoid::default' do
         .with(minute: '*', hour: '*', day: '*', month: '*', weekday: '*')
       expect(chef_run).to_not create_cron('sanoid')
         .with(minute: '1', hour: '1', day: '*', month: '*', weekday: '*')
+    end
+    it 'sanoid conf file template exists but set to do nothing' do
+      template = chef_run.template('/etc/sanoid/sanoid.conf')
+      expect(template).to do_nothing
+    end
+    it 'accumulator points at sanoid conf template resource' do
+      expect(chef_run).to custom_accumulator_matcher('sanoid.conf.templates')
+        .with_target(template: '/etc/sanoid/sanoid.conf')
+        .with_variable_name(:sanoid)
     end
   end
 end
