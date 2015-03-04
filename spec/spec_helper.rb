@@ -21,3 +21,5 @@ RSpec.configure do |config|
   # Be random!
   config.order = 'random'
 end
+
+at_exit { ChefSpec::Coverage.report! }
